@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-export async function getImageBinary(messageId, LINE_HEADER) {
+async function getImageBinary(messageId, LINE_HEADER) {
   const originalImage = await axios({
     method: 'get',
     headers: LINE_HEADER,
@@ -9,3 +9,5 @@ export async function getImageBinary(messageId, LINE_HEADER) {
   });
   return originalImage.data;
 }
+
+export default getImageBinary();

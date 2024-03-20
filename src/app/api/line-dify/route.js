@@ -2,7 +2,7 @@ import axios from 'axios';
 import { NextResponse } from 'next/server';
 import sqlite3 from 'sqlite3';
 import { open, Database } from 'sqlite';
-import getImageBinary from '../../../line-utils';
+import { getImageBinary } from '../../line-utils/getImageBinary';
 
 // Let's initialize it as null initially, and we will assign the actual database instance later.
 let db = null;
