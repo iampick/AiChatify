@@ -29,7 +29,7 @@ export async function POST(req, res) {
   let conversionId = '';
   console.log(data_raw.events[0].message);
 
-  return NextResponse.json({ message: 'Hello API from POST' }, { status: 200 });
+  // return NextResponse.json({ message: 'Hello API from POST' }, { status: 200 });
   // Chat with AI
   if (!db) {
     // If the database instance is not initialized, open the database connection
