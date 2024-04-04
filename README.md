@@ -7,10 +7,13 @@ First, config the development server:
 ```bash
 #create  environtment
 Rename sample-env.local to env.local
-#config environment
-Get All keys and token put in rnv.local
 
+#config environment
+Get Put in all keys and tokens  env.local
+
+#install dependencies lib rub
 npm install
+
 # or
 yarn install
 
@@ -21,6 +24,7 @@ Run local development server:
 ```bash
 #If you use npm run
 npm run dev
+
 #If you use yarn run
 npm yarn dev
 ```
