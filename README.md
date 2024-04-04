@@ -2,16 +2,27 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, config the development server:
 
 ```bash
+#create  environtment
+Rename sample-env.local to env.local
+#config environment
+Get All keys and token put in rnv.local
+
+npm install
+# or
+yarn install
+
+```
+
+Run local development server:
+
+```bash
+#If you use npm run
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+#If you use yarn run
+npm yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
