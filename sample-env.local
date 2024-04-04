@@ -1,0 +1,15 @@
+# CopyWriting
+DIFY_API_KEY=KEY 
+
+# Adaptive English
+# DIFY_API_KEY=KEY
+
+# MANA
+# DIFY_API_KEY=KEY
+
+
+### Line ###
+LINE_ACCESS_TOKEN=ACCESS_TOKEN
+LINE_SECRET_TOKEN=SECRET_TOKEN
+
+API_ENPOINT=http://localhost:3000

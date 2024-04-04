@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@line/bot-sdk": "^9.0.3",
+    "@prisma/client": "^5.11.0",
     "axios": "^1.6.8",
     "axios-error": "^1.0.4",
     "crypto": "^1.0.1",
