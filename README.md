@@ -14,7 +14,7 @@ Put it all keys and tokens into env.local
 #install dependencies lib run
 npm install
 
-# or
+# if you use yarn delete package-lock.json then run
 yarn install
 
 ```
