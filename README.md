@@ -9,9 +9,9 @@ First, config the development server:
 Rename sample-env.local to env.local
 
 #config environment
-Get Put in all keys and tokens  env.local
+Put it all keys and tokens into env.local
 
-#install dependencies lib rub
+#install dependencies lib run
 npm install
 
 # or
@@ -26,7 +26,7 @@ Run local development server:
 npm run dev
 
 #If you use yarn run
-npm yarn dev
+yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
