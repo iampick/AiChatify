@@ -29,10 +29,10 @@ export async function POST(req, res) {
   const data_raw = await req.json();
   const replyToken = data_raw.events[0].replyToken;
   const retrieveMsg = data_raw.events[0].message.text;
-  const userId = data_raw.destination;
+  const userId = data_raw.events[0].source.userId;
   const messageType = data_raw.events[0].message.type;
   let conversionId = '';
-  // console.log(data_raw.events[0].message);
+  // console.log(data_raw.events);
 
   // Query to get all todos from the "todo" table
   const userInDb = await prisma.UserConv.findFirst({
@@ -83,7 +83,7 @@ export async function POST(req, res) {
 
         try {
           const parsedObj = JSON.parse(jsonPart);
-          console.log(parsedObj.answer);
+          // console.log(parsedObj.answer);
 
           // Add the conversation_id to the Set (duplicates will be ignored)
           extractedData.conversation_ids.add(parsedObj.conversation_id);
@@ -108,7 +108,7 @@ export async function POST(req, res) {
       // Combine unique answers into a single string
       const combinedAnswer = extractedData.answers[0]; // Join with spaces
       // const combinedAnswer = extractedData.answers.join(''); // Join with spaces
-      console.log(combinedAnswer);
+      // console.log(combinedAnswer);
       if (conversionId === '') {
         const result = await prisma.userConv.create({
           data: {
