@@ -13,8 +13,8 @@ const prisma = new PrismaClient();
 // Let's initialize it as null initially, and we will assign the actual database instance later.
 let db = null;
 const config = {
-  accessToken: process.env.LINE_ACCESS_TOKEN,
-  channelSecret: process.env.LINE_SECRET_TOKEN,
+  accessToken: process.env.NEXT_PUBLIC_LINE_ACCESS_TOKEN,
+  channelSecret: process.env.NEXT_PUBLIC_LINE_SECRET_TOKEN,
 };
 
 // console.log(client);
@@ -55,7 +55,7 @@ export async function POST(req, res) {
   let configAi = {
     method: 'post',
     maxBodyLength: Infinity,
-    url: `${process.env.API_ENPOINT}/api/dify`,
+    url: `${process.env.NEXT_PUBLIC_API_ENPOINT}/api/dify`,
     headers: {
       'Content-Type': 'application/json',
     },
