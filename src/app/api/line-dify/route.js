@@ -196,6 +196,7 @@ async function connectDify(dataAI) {
     conversation_id: converId,
     user: data_raw.userId,
   };
+  console.log('debug 1');
 
   try {
     const response = await axios.post(
@@ -203,6 +204,7 @@ async function connectDify(dataAI) {
       data,
       { headers },
     );
+    console.log('debug 2');
     return response.data;
     // Return the data from the API call
     return new Response(response.data, {
@@ -212,6 +214,8 @@ async function connectDify(dataAI) {
       },
     });
   } catch (error) {
+    console.log('debug 3');
+
     console.error(error);
     let status = 500;
     let message = 'An error occurred while processing your request.';
@@ -225,6 +229,8 @@ async function connectDify(dataAI) {
       // The request was made but no response was received
       message = 'No response was received from the API.';
     }
+    console.log('debug 4');
+
     return message;
     return new Response(JSON.stringify({ message }), {
       status: status,
