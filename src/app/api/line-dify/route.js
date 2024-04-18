@@ -1,4 +1,5 @@
 import axios from 'axios';
+import xior from 'xior';
 import { NextResponse } from 'next/server';
 import sqlite3 from 'sqlite3';
 import { open, Database } from 'sqlite';
@@ -148,16 +149,29 @@ export async function POST(req, res) {
           },
         ],
       };
-      const Lineresponse = await axios.post(
-        'https://api.line.me/v2/bot/message/reply',
-        data,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${config.accessToken}`,
-          },
+      // const Lineresponse = await axios.post(
+      //   'https://api.line.me/v2/bot/message/reply',
+      //   data,
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: `Bearer ${config.accessToken}`,
+      //     },
+      //   },
+      // );
+
+      const xiorInstance = xior.create({
+        baseURL: 'https://api.line.me/v2/bot/message',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+      });
+
+      const Lineresponse = await xiorInstance.post('/reply', data, {
+        headers: {
+          Authorization: `Bearer ${config.accessToken}`,
+        },
+      });
 
       // console.log(JSON.stringify(Lineresponse.data));
     })
@@ -200,20 +214,26 @@ async function connectDify(dataAI) {
 
   try {
     console.log('debug 1.2');
-    const response = await axios.post(
-      'https://api.dify.ai/v1/chat-messages',
-      data,
-      { headers },
-    );
-    console.log('debug 2');
-    return response.data;
-    // Return the data from the API call
-    return new Response(response.data, {
-      status: 200,
+
+    // const response = await axios.post(
+    //   'https://api.dify.ai/v1/chat-messages',
+    //   data,
+    //   { headers },
+    // );
+    // Create an instance of xior with the base URL and any default headers
+    const xiorInstance = xior.create({
+      baseURL: 'https://api.dify.ai/v1',
       headers: {
-        'Content-Type': 'application/json',
+        // Add any common default headers here
       },
     });
+
+    const response = await xiorInstance.post('/chat-messages', data, {
+      headers,
+    });
+
+    console.log('debug 2');
+    return response.data;
   } catch (error) {
     console.log('debug 3');
 
@@ -233,11 +253,5 @@ async function connectDify(dataAI) {
     console.log('debug 4');
 
     return message;
-    return new Response(JSON.stringify({ message }), {
-      status: status,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
   }
 }

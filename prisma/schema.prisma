@@ -16,7 +16,7 @@ datasource db {
 
 model UserConv {
   id           Int     @id @default(autoincrement())
-  userId       String @unique
+  userId       String
   conversionId String?
   apiId        String
 

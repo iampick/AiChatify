@@ -24,7 +24,8 @@
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
     "ts-invariant": "^0.10.3",
-    "warning": "^4.0.3"
+    "warning": "^4.0.3",
+    "xior": "^0.3.12"
   },
   "devDependencies": {
     "autoprefixer": "^10",
