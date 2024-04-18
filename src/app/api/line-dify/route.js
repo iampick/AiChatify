@@ -33,7 +33,7 @@ export async function POST(req, res) {
   const userId = data_raw.events[0].source.userId;
   const messageType = data_raw.events[0].message.type;
   let conversionId = '';
-  // console.log(data_raw.events[0].message);
+  console.log(data_raw.events[0].message);
 
   // Query to get all todos from the "todo" table
   const userInDb = await prisma.UserConv.findFirst({
@@ -68,7 +68,7 @@ export async function POST(req, res) {
       // Assuming `response.data` is a stringified JSON that looks like the given output.
       const dataString = JSON.parse(JSON.stringify(response.data));
       const rawData = response.data;
-      // console.log(response.data);
+      console.log(response.data);
       const dataParts = rawData
         .split('\n')
         .filter((part) => part.startsWith('data:'));
