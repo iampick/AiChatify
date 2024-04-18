@@ -2,9 +2,16 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:../sqlite.db"
+// }
+
 datasource db {
-  provider = "sqlite"
-  url      = "file:../sqlite.db"
+  provider = "postgresql"
+  url      = env("NEXT_PUBLIC_DATABASE")
+  // relationMode = "prisma"
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model UserConv {
