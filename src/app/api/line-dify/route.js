@@ -62,6 +62,7 @@ export async function POST(req, res) {
     data: dataToAi,
   };
 
+  console.log(configAi);
   axios
     .request(configAi)
     .then(async (response) => {
