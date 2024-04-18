@@ -1,33 +1,41 @@
 -- CreateTable
 CREATE TABLE "UserConv" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "userId" TEXT NOT NULL,
-    "conversionId" TEXT
+    "conversionId" TEXT,
+
+    CONSTRAINT "UserConv_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "name" TEXT,
-    "email" TEXT NOT NULL
+    "email" TEXT NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Project" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "serviceId" INTEGER NOT NULL,
     "status" TEXT NOT NULL,
-    "uuid" TEXT NOT NULL
+    "uuid" TEXT NOT NULL,
+
+    CONSTRAINT "Project_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Service" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "projectId" INTEGER NOT NULL,
-    "name" TEXT NOT NULL
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "Service_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
