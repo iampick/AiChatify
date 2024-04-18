@@ -25,7 +25,7 @@ export async function GET(req, res) {
 }
 
 export async function POST(req, res) {
-  console.log('line POST');
+  // console.log('line POST');
 
   const data_raw = await req.json();
   const replyToken = data_raw.events[0].replyToken;
@@ -68,7 +68,7 @@ export async function POST(req, res) {
       // Assuming `response.data` is a stringified JSON that looks like the given output.
       const dataString = JSON.parse(JSON.stringify(response.data));
       const rawData = response.data;
-      console.log(response.data);
+      // console.log(response.data);
       const dataParts = rawData
         .split('\n')
         .filter((part) => part.startsWith('data:'));
@@ -125,7 +125,7 @@ export async function POST(req, res) {
       // Get a cookie value by name
       // const cookieValue = req.cookies.get('difyPickConId');
       // const Nextresponse = NextResponse.next();
-      // console.log(combinedAnswer);
+      console.log(combinedAnswer);
 
       const data = {
         replyToken,
@@ -146,7 +146,7 @@ export async function POST(req, res) {
           },
         },
       );
-      console.log(JSON.stringify(Lineresponse.data));
+      // console.log(JSON.stringify(Lineresponse.data));
     })
     .catch((error) => {
       console.log(error);
@@ -156,7 +156,7 @@ export async function POST(req, res) {
   // console.log(data_raw);
   // console.log(data_raw.events[0].message);
 
-  console.log(JSON.stringify(response.data, null, 4));
+  // console.log(JSON.stringify(response.data, null, 4));
 
   return NextResponse.json({ message: 'Hello API from POST' }, { status: 200 });
 }

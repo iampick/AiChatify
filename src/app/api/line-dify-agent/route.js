@@ -24,7 +24,7 @@ export async function GET(req, res) {
 }
 
 export async function POST(req, res) {
-  console.log('line POST');
+  // console.log('line POST');
 
   const data_raw = await req.json();
   const replyToken = data_raw.events[0].replyToken;
@@ -67,7 +67,7 @@ export async function POST(req, res) {
       // Assuming `response.data` is a stringified JSON that looks like the given output.
       const dataString = JSON.parse(JSON.stringify(response.data));
       const rawData = response.data;
-      console.log(response.data);
+      // console.log(response.data);
       const dataParts = rawData
         .split('\n')
         .filter((part) => part.startsWith('data:'));
