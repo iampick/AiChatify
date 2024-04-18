@@ -30,7 +30,7 @@ export async function POST(req, res) {
   const data_raw = await req.json();
   const replyToken = data_raw.events[0].replyToken;
   const retrieveMsg = data_raw.events[0].message.text;
-  const userId = data_raw.destination;
+  const userId = data_raw.events[0].source.userId;
   const messageType = data_raw.events[0].message.type;
   let conversionId = '';
   // console.log(data_raw.events[0].message);
