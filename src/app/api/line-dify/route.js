@@ -63,106 +63,116 @@ export async function POST(req, res) {
   };
 
   // console.log(configAi);
-  try {
-    axios
-      .request(configAi)
-      .then(async (response) => {
-        // Assuming `response.data` is a stringified JSON that looks like the given output.
-        const dataString = JSON.parse(JSON.stringify(response.data));
-        const rawData = response.data;
-        console.log(response.data);
-        const dataParts = rawData
-          .split('\n')
-          .filter((part) => part.startsWith('data:'));
+  console.log(`debug 1`);
+  axios
+    .request(configAi)
+    .then(async (response) => {
+      // Assuming `response.data` is a stringified JSON that looks like the given output.
+      console.log(`debug 2`);
 
-        // Define an object to hold the extracted information.
-        let extractedData = {
-          conversation_ids: new Set(), // Use a Set to avoid duplicate IDs
-          answers: [],
-        };
-        // console.log(dataParts.answer);
-        dataParts.forEach((part) => {
-          const jsonPart = part.substring(6); // Remove 'data: ' prefix
+      const dataString = JSON.parse(JSON.stringify(response.data));
+      const rawData = response.data;
+      console.log(response.data);
+      const dataParts = rawData
+        .split('\n')
+        .filter((part) => part.startsWith('data:'));
 
-          try {
-            const parsedObj = JSON.parse(jsonPart);
+      // Define an object to hold the extracted information.
+      let extractedData = {
+        conversation_ids: new Set(), // Use a Set to avoid duplicate IDs
+        answers: [],
+      };
+      console.log(`debug 3`);
 
-            // Add the conversation_id to the Set (duplicates will be ignored)
-            extractedData.conversation_ids.add(parsedObj.conversation_id);
+      console.log(dataParts.answer);
+      dataParts.forEach((part) => {
+        const jsonPart = part.substring(6); // Remove 'data: ' prefix
+        console.log(`debug 4`);
 
-            // Add the answer to the answers array, handling potential undefined values
+        try {
+          const parsedObj = JSON.parse(jsonPart);
 
-            extractedData.answers.push(parsedObj.answer || ''); // Use empty string if undefined
-          } catch (error) {
-            console.error('Failed to parse JSON:', jsonPart, 'Error:', error);
-            // Handle parse error or continue (e.g., log the error and continue)
-          }
-        });
+          // Add the conversation_id to the Set (duplicates will be ignored)
+          extractedData.conversation_ids.add(parsedObj.conversation_id);
 
-        // Convert the Set of conversation IDs to an array for easier usage.
-        extractedData.conversation_ids = [...extractedData.conversation_ids];
-        // console.log('-----extractedData');
-        // console.log(extractedData.answers);
-        // Remove duplicate sentences from extractedData.answers, handling newline characters and whitespace variations
-        // const uniqueAnswers = [...new Set(extractedData.answers)];
+          // Add the answer to the answers array, handling potential undefined values
 
-        // console.log(uniqueAnswers);
-        const converId = extractedData.conversation_ids;
-        const converIdString = converId.join(); // This will use comma as the default separator
-
-        // Combine unique answers into a single string
-        const combinedAnswer = extractedData.answers.join(''); // Join with spaces
-        // const combinedAnswer = extractedData.answers.join(''); // Join with spaces
-
-        if (conversionId === '') {
-          const result = await prisma.userConv.create({
-            data: {
-              userId: userId,
-              conversionId: converIdString,
-            },
-          });
+          extractedData.answers.push(parsedObj.answer || ''); // Use empty string if undefined
+        } catch (error) {
+          console.error('Failed to parse JSON:', jsonPart, 'Error:', error);
+          // Handle parse error or continue (e.g., log the error and continue)
         }
-        // console.log('Conversation IDs:', extractedData.conversation_ids);
-        // console.log('Answers:', extractedData.answers.join(' ')); // Join answers or handle as needed.
-        // Get a cookie value by name
-        // const cookieValue = req.cookies.get('difyPickConId');
-        // const Nextresponse = NextResponse.next();
-        console.log(combinedAnswer);
-
-        const data = {
-          replyToken,
-          messages: [
-            {
-              type: 'text',
-              text: combinedAnswer,
-            },
-          ],
-        };
-        const Lineresponse = await axios.post(
-          'https://api.line.me/v2/bot/message/reply',
-          data,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${config.accessToken}`,
-            },
-          },
-        );
-        // console.log(JSON.stringify(Lineresponse.data));
-      })
-      .catch((error) => {
-        console.log(error);
       });
-  } catch (error) {
-    console.log(`error2 ${error}`);
-  }
+      console.log(`debug 5`);
 
+      // Convert the Set of conversation IDs to an array for easier usage.
+      extractedData.conversation_ids = [...extractedData.conversation_ids];
+      // console.log('-----extractedData');
+      // console.log(extractedData.answers);
+      // Remove duplicate sentences from extractedData.answers, handling newline characters and whitespace variations
+      // const uniqueAnswers = [...new Set(extractedData.answers)];
+
+      // console.log(uniqueAnswers);
+      const converId = extractedData.conversation_ids;
+      const converIdString = converId.join(); // This will use comma as the default separator
+
+      // Combine unique answers into a single string
+      const combinedAnswer = extractedData.answers.join(''); // Join with spaces
+      // const combinedAnswer = extractedData.answers.join(''); // Join with spaces
+      console.log(`debug 6`);
+
+      if (conversionId === '') {
+        const result = await prisma.userConv.create({
+          data: {
+            userId: userId,
+            conversionId: converIdString,
+          },
+        });
+      }
+      console.log(`debug 7`);
+
+      // console.log('Conversation IDs:', extractedData.conversation_ids);
+      // console.log('Answers:', extractedData.answers.join(' ')); // Join answers or handle as needed.
+      // Get a cookie value by name
+      // const cookieValue = req.cookies.get('difyPickConId');
+      // const Nextresponse = NextResponse.next();
+      console.log(combinedAnswer);
+
+      const data = {
+        replyToken,
+        messages: [
+          {
+            type: 'text',
+            text: combinedAnswer,
+          },
+        ],
+      };
+      const Lineresponse = await axios.post(
+        'https://api.line.me/v2/bot/message/reply',
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${config.accessToken}`,
+          },
+        },
+      );
+      console.log(`debug 8`);
+
+      // console.log(JSON.stringify(Lineresponse.data));
+    })
+    .catch((error) => {
+      console.log(`debug 9`);
+
+      console.log(error);
+    });
   // Chat with AI
 
   // console.log(data_raw);
   // console.log(data_raw.events[0].message);
 
   // console.log(JSON.stringify(response.data, null, 4));
+  console.log(`debug 10`);
 
   return NextResponse.json({ message: 'Hello API from POST' }, { status: 200 });
 }
