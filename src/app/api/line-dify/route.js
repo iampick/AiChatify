@@ -33,7 +33,7 @@ export async function POST(req, res) {
   const userId = data_raw.events[0].source.userId;
   const messageType = data_raw.events[0].message.type;
   let conversionId = '';
-  // console.log(data_raw.events[0].message);
+  console.log(data_raw.events[0].message);
   const last8Chars = process.env.NEXT_PUBLIC_DIFY_API_KEY.slice(-8);
   // Query to get all todos from the "todo" table
   const userInDb = await prisma.UserConv.findFirst({
@@ -73,9 +73,9 @@ export async function POST(req, res) {
   connectDify(dataToAi)
     .then(async (response) => {
       // Assuming `response.data` is a stringified JSON that looks like the given output.
-      // console.log('------------------');
-      // console.log(response);
-      // console.log('------------------');
+      console.log('------------------');
+      console.log(typeof response);
+      console.log('------------------');
 
       const rawData = response.replace(/\*/g, '');
       const dataParts = rawData
@@ -177,9 +177,9 @@ export async function POST(req, res) {
 async function connectDify(dataAI) {
   const api_key = process.env.NEXT_PUBLIC_DIFY_API_KEY; // Ensure you have your API key stored in .env.local
   const data_raw = JSON.parse(dataAI);
-  // console.log('----------');
-  // console.log(data_raw);
-  // console.log('----------');
+  console.log('----------');
+  console.log(data_raw);
+  console.log('----------');
 
   // Set up the headers
   const headers = {
