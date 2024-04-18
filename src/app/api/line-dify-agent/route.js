@@ -67,7 +67,7 @@ export async function POST(req, res) {
       // Assuming `response.data` is a stringified JSON that looks like the given output.
       const dataString = JSON.parse(JSON.stringify(response.data));
       const rawData = response.data;
-      // console.log(response.data);
+      console.log(response.data);
       const dataParts = rawData
         .split('\n')
         .filter((part) => part.startsWith('data:'));
