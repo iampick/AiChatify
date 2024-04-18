@@ -199,6 +199,7 @@ async function connectDify(dataAI) {
   console.log('debug 1');
 
   try {
+    console.log('debug 1.2');
     const response = await axios.post(
       'https://api.dify.ai/v1/chat-messages',
       data,
