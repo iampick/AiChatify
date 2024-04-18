@@ -146,7 +146,7 @@ export async function POST(req, res) {
           },
         },
       );
-      // console.log(JSON.stringify(Lineresponse.data));
+      console.log(JSON.stringify(Lineresponse.data));
     })
     .catch((error) => {
       console.log(error);
