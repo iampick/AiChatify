@@ -4,7 +4,10 @@ import axios from 'axios';
 export async function POST(req) {
   const api_key = process.env.NEXT_PUBLIC_DIFY_API_KEY; // Ensure you have your API key stored in .env.local
   const data_raw = await req.json();
-  console.log(data_raw);
+  // console.log('----------');
+  // console.log(data_raw);
+  // console.log('----------');
+
   // Set up the headers
   const headers = {
     Authorization: `Bearer ${api_key}`,

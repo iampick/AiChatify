@@ -18,6 +18,7 @@ model UserConv {
   id           Int     @id @default(autoincrement())
   userId       String @unique
   conversionId String?
+  apiId        String
 
   @@index([userId], map: "idx_UserConv")
 }
